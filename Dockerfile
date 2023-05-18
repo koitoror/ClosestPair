@@ -3,7 +3,6 @@ LABEL mantainer="koitoror"
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
-COPY ./requirements.txt /app/requirements.txt
 
 # Get app
 # RUN python -m django --version
@@ -12,9 +11,16 @@ COPY ./requirements.txt /app/requirements.txt
 # RUN python manage.py createsuperuser --email admin@example.com --username admin
 
 
-COPY ./app /app
-COPY ./closest /closest
+COPY ./app /app/app/
+COPY ./closest app/closest
+COPY ./requirements.txt /app/
+COPY ./manage.py /app/
+COPY ./entrypoint.sh /app/
+
 WORKDIR /app
+
+RUN pip install -r requirements.txt
+
 EXPOSE 8000
 
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=app.settings" ]

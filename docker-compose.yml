@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8
+    hostname: mysql
+    # restart: always
+    ports:
+      - '3308:3306'
+    environment:
+       MYSQL_DATABASE: 'test'
+       MYSQL_USER : 'mysqluser'
+       MYSQL_PASSWORD: 'root123'
+       MYSQL_ROOT_PASSWORD: 'root123'
+    # volumes:
+    #   - D:\django_project\db1:/var/run/mysqld
+    #   - D:\django_project\db:/var/lib/mysql
+  web:
+    build: .
+    # restart: on-failure  
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

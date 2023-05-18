@@ -34,6 +34,7 @@ echo "Running Server"
 # uwsgi --socket :8000 --workers 4 --master --enable-threads --module app.wsgi
 # gunicorn --chdir backend app.wsgi
 # gunicorn app.wsgi:application --bind 0.0.0.0:8000
-gunicorn --chdir app wsgi:application --bind 0.0.0.0:8000 --log-file - --log-level debug
+# gunicorn --chdir app wsgi:application --bind 0.0.0.0:8000 --log-file - --log-level debug
+gunicorn --chdir app wsgi:application --log-file - --log-level debug
 
 echo "Done.."

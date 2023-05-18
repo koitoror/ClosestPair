@@ -12,7 +12,7 @@ And then in this case the result would be:
 2,2;4,5
 
 
-ADDITIONALLY : admin interface for viewing values stored on the DB. And  unit tests.
+ADDITIONALLY : admin interface for viewing values stored on the DB.
 
 
 ## API Installation
@@ -78,16 +78,34 @@ To test endpoints manually fire up postman and run the following endpoints
 GET  `/api/v1/admin` | admin interface for viewing values stored on the DB.
 POST  `/api/v1/closest` | closest points from given points
 
-## Example Image
+## Example  API Spec
+The preferred JSON object to be returned by the API should be structured as follows:
 
+**Request Payload**: Content-Type: application/json
 
+```source-json
+{
+  "points": "2,2;-1,30;20,11;4,5"
+}
+```
 
-## API Test
+**Response**
+HTTP/1.1 200 OK
+
+```
+
+{
+    "closest_points": "2,2;4,5"
+}
+```
+  
+
+## API Unit Tests
 
 To run your tests use
 
 ```bash
-$ python run.py test or
+$ python manage.py test or
 $ pytest --cov
 ```
 

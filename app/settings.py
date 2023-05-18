@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -132,6 +133,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -149,4 +153,6 @@ CSRF_TRUSTED_ORIGINS = (
     # '0.0.0.0:4000',
     # 'localhost:4000',
     'https://koitoror-redesigned-palm-tree-4gw7wrxpxjphqxx6-8000.preview.app.github.dev',
+    'http://closestpair-production.up.railway.app',
+    'https://closestpair-production.up.railway.app',
 )

@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # "corsheaders",
 ]
 
 MIDDLEWARE = [
+    # "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -79,6 +81,19 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'HOST': os.environ.get('DB_HOST'),
+#         'HOST': os.environ.get('DB_PORT'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'NAME': os.environ.get('DB_NAME'),
+#     }
+# }
+
 
 
 # Password validation
@@ -121,3 +136,17 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CORS_ORIGIN_WHITELIST = (
+#     '*',
+    # '0.0.0.0:4000',
+    # 'localhost:4000',
+    # 'https://koitoror-redesigned-palm-tree-4gw7wrxpxjphqxx6-8000.preview.app.github.dev',
+# )
+
+CSRF_TRUSTED_ORIGINS = (
+    # '*',
+    # '0.0.0.0:4000',
+    # 'localhost:4000',
+    'https://koitoror-redesigned-palm-tree-4gw7wrxpxjphqxx6-8000.preview.app.github.dev',
+)

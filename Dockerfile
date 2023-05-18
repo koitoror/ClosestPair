@@ -9,6 +9,8 @@ COPY ./requirements.txt /app/requirements.txt
 # RUN python -m django --version
 # RUN python -m django startproject app /app
 # RUN python -m django startapp closest /closest
+# RUN python manage.py createsuperuser --email admin@example.com --username admin
+
 
 COPY ./app /app
 COPY ./closest /closest

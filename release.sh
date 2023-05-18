@@ -2,17 +2,19 @@
 
 set -e
 
-ls -la /app/staticfiles/
-ls -la /app/static/
+# ls -la /app/staticfiles/
+# ls -la /app/static/
+ls -la staticfiles/
+ls -la static/
 
 whoami
 
 
-echo "Waiting for MySQL"
-until echo '\q' | mysql -h"$DB_HOST" -P"$DB_PORT" -uroot -p"$DB_PASSWORD" $DB_NAME; do
-    >&2 echo "MySQL is unavailable - Sleeping..."
-    sleep 2
-done
+# echo "Waiting for MySQL"
+# until echo '\q' | mysql -h"$DB_HOST" --port "$DB_PORT" -uroot -p"$DB_PASSWORD" --protocol=TCP $DB_NAME; do
+#     >&2 echo "MySQL is unavailable - Sleeping..."
+#     sleep 2
+# done
 
 echo -e "\nMySQL ready!"
 

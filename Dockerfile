@@ -9,7 +9,7 @@ ENV PYTHONBUFFERED 1
 # RUN python -m django startproject app /app
 # RUN python -m django startapp closest /closest
 # RUN python manage.py createsuperuser --email admin@example.com --username admin
-
+# RUN python manage.py createsuperuser --email admin@example.com --username admin --password 123456
 
 COPY ./app /app/app/
 COPY ./closest app/closest
@@ -21,11 +21,11 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 RUN python manage.py migrate
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic --noinput
 
  
 EXPOSE 8000
 
 # CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=app.settings" ]
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application"]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application --log-file -"]
 

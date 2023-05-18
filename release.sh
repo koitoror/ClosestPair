@@ -2,15 +2,24 @@
 
 set -e
 
-ls -la /app/frontend/staticfiles/
-ls -la /app/frontend/build
+ls -la /app/staticfiles/
+ls -la /app/static/
 
 whoami
+
+
+echo "Waiting for MySQL"
+until echo '\q' | mysql -h"$DB_HOST" -P"$DB_PORT" -uroot -p"$DB_PASSWORD" $DB_NAME; do
+    >&2 echo "MySQL is unavailable - Sleeping..."
+    sleep 2
+done
+
+echo -e "\nMySQL ready!"
 
 echo "Running Release Tasks"
 
 # python manage.py wait_for_db
-# python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 echo "Running Database migrations and migrating the new changes"
 # python manage.py makemigrations
@@ -23,5 +32,6 @@ echo "Running Server"
 # uwsgi --socket :8000 --workers 4 --master --enable-threads --module app.wsgi
 # gunicorn --chdir backend app.wsgi
 # gunicorn app.wsgi:application --bind 0.0.0.0:8000
+gunicorn --chdir app wsgi:application --bind 0.0.0.0:8000 --log-file - --log-level debug
 
 echo "Done.."

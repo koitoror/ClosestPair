@@ -20,7 +20,9 @@ COPY ./entrypoint.sh /app/
 WORKDIR /app
 
 RUN pip install -r requirements.txt
-
+ 
 EXPOSE 8000
 
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=app.settings" ]
+# CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=app.settings" ]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application"]
+

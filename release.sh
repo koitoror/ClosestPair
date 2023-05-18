@@ -21,7 +21,7 @@ echo -e "\nMySQL ready!"
 echo "Running Release Tasks"
 
 # python manage.py wait_for_db
-python manage.py collectstatic --noinput
+# python manage.py collectstatic --noinput
 
 echo "Running Database migrations and migrating the new changes"
 # python manage.py makemigrations

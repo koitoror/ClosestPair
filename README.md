@@ -11,7 +11,19 @@ And then in this case the result would be:
 
 ADDITIONALLY : admin interface for viewing values stored on the DB. And  unit tests.
 
+
 ## API Installation
+
+### Prerequisites
+
+In order to install and run this project locally, you would need to have the following installed on you local machine.
+
+* [**Python 3+**](https://www.python.org/downloads/release/python-368/)
+* [**Django 4+**](https://www.djangoproject.com/download/) 
+* [**Django Rest Framework 3+**](https://www.django-rest-framework.org/) 
+* [**MySQL**](https://www.mysql.com/downloads/)
+
+
 
 1. Clone this repository into a folder of your choice:
 ```
@@ -38,15 +50,15 @@ Set environment variables for:
 
 > `DJANGO_ENV` is the enviroment you are running on. Should be either `Production`, `Development` or `Testing`. NOTE: its case sensitive
 
-> `DB_ROLE` is the postgresql user
-
-> `DB_PASSWORD` is the postgresql password for the user created
+> `DB_HOST` which is localhost
 
 > `DB_PORT`  the default port for postgresql service which 5432
 
-> `DB_HOST` which is localhost
+> `DB_USER` is the postgresql user
 
-> `DATABASE` the name of the app database
+> `DB_PASSWORD` is the postgresql password for the user created
+
+> `DB_NAME` the name of the app database
 
 ### Using Docker 
 Build image

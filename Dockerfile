@@ -27,5 +27,5 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=app.settings" ]
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application --log-level debug"]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "app.wsgi:application --log-file -"]
 

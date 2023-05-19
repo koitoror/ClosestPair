@@ -42,7 +42,7 @@ jobs:
         DB_USER: root
         DB_PASSWORD: root123
         DB_HOST: 127.0.0.1
-        DB_PORT: $
+        DB_PORT: 3306
         DB_NAME: test
     - name: Run Tests
       run: |
@@ -53,7 +53,7 @@ jobs:
         DB_USER: root
         DB_PASSWORD: root123
         DB_HOST: 127.0.0.1
-        DB_PORT: $
+        DB_PORT: 3306
         DB_NAME: test
     - name: Run Linter
       run: |

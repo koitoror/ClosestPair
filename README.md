@@ -109,3 +109,17 @@ $ python manage.py test or
 $ pytest --cov
 ```
 
+
+## User's Data
+**Default Admin Login Details**( CLOSEST PAIR )
+
+Username - admin
+
+Password - 123456
+
+
+# UI link for RAILWAY
+
+```
+https://closestpair-production.up.railway.app/admin
+```

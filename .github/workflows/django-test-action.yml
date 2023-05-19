@@ -20,7 +20,7 @@ jobs:
         image: mysql:8
         env:
           MYSQL_ROOT_PASSWORD: root123
-          MYSQL_DATABASE: root
+          MYSQL_DATABASE: test
         ports: ['3306:3306']
 
     steps:

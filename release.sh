@@ -24,7 +24,7 @@ echo "Running Release Tasks"
 # python manage.py collectstatic --noinput
 
 echo "Running Database migrations and migrating the new changes"
-# python manage.py makemigrations
+python manage.py makemigrations
 
 python manage.py migrate --plan
 python manage.py migrate --noinput

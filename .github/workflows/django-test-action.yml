@@ -35,8 +35,10 @@ jobs:
         pip install pytest
         pip install flake8
         pip install -r requirements.txt
-    - name: Run Make Migrations
-      run: python manage.py makemigrations
+    # - name: Run Make Migrations
+    #   run: python manage.py makemigrations
+    - name: Run Migrations
+      run: python manage.py makemigrations & migrate
       env: 
         # DB_ENGINE: django.db.backends.mysql
         DB_USER: root
@@ -44,8 +46,6 @@ jobs:
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_NAME: test
-    - name: Run Migrations
-      run: python manage.py migrate
     - name: Run Tests
       run: |
         python manage.py test

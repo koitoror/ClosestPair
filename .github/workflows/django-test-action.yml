@@ -38,7 +38,10 @@ jobs:
     # - name: Run Make Migrations
     #   run: python manage.py makemigrations
     - name: Run Migrations
-      run: python manage.py makemigrations & migrate
+      # run: python manage.py makemigrations & migrate
+      run: |
+        python manage.py makemigrations
+        python manage.py migrate
       env: 
         # DB_ENGINE: django.db.backends.mysql
         DB_USER: root

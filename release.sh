@@ -30,6 +30,7 @@ python manage.py migrate --plan
 python manage.py migrate --noinput
 
 echo "Running Server"
+python manage.py createsuperuser --noinput
 # python manage.py runserver 0.0.0.0:8000
 # uwsgi --socket :8000 --workers 4 --master --enable-threads --module app.wsgi
 # gunicorn --chdir backend app.wsgi

@@ -10,11 +10,11 @@ class PointsAPIView(APIView):
         serializer = PointsSerializer(data=request.data)
         if serializer.is_valid():
             points = serializer.validated_data['points'].split(';')
-            coordinates = []
+            pointers = []
             for point in points:
-                coordinates.append([float(x) for x in point.split(',')])
+                pointers.append([float(x) for x in point.split(',')])
 
-            closest_pairs = self.find_closest_pairs(coordinates)
+            closest_pairs = self.calculate_closest_pairs(pointers)
 
             points = Points(
                 points=serializer.validated_data['points'], closest_pairs=closest_pairs)
@@ -28,15 +28,15 @@ class PointsAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
-    def find_closest_pairs(coordinates):
+    def calculate_closest_pairs(pointers):
         closest_pairs = []
         distances = []
 
         # Calculate distances between points
-        for i in range(len(coordinates)):
-            for j in range(i+1, len(coordinates)):
-                distance = ((coordinates[i][0] - coordinates[j][0]) ** 2 +
-                            (coordinates[i][1] - coordinates[j][1]) ** 2) ** 0.5
+        for i in range(len(pointers)):
+            for j in range(i+1, len(pointers)):
+                distance = ((pointers[i][0] - pointers[j][0]) ** 2 +
+                            (pointers[i][1] - pointers[j][1]) ** 2) ** 0.5
                 distances.append((i, j, distance))
 
         # Sort distances in ascending order
@@ -45,6 +45,6 @@ class PointsAPIView(APIView):
         # Get the two closest points
         closest_indices = [distances[0][0], distances[0][1]]
         closest_pairs = [
-            ','.join(str(coord) for coord in coordinates[idx]) for idx in closest_indices]
+            ','.join(str(pointer) for pointer in pointers[idx]) for idx in closest_indices]
 
         return ';'.join(closest_pairs)

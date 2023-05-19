@@ -89,13 +89,13 @@ The preferred JSON object to be returned by the API should be structured as foll
 }
 ```
 
-**Response**
+**Success Response**
 HTTP/1.1 200 OK
 
 ```
 
 {
-    "closest_points": "2,2;4,5"
+    "closest_pairs": "2,2;4,5"
 }
 ```
   

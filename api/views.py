@@ -14,22 +14,22 @@ class PointsAPIView(APIView):
             for point in points:
                 coordinates.append([float(x) for x in point.split(',')])
 
-            closest_points = self.find_closest_points(coordinates)
+            closest_pairs = self.find_closest_pairs(coordinates)
 
-            point_set = Points(
-                points=serializer.validated_data['points'], closest_points=closest_points)
-            point_set.save()
+            points = Points(
+                points=serializer.validated_data['points'], closest_pairs=closest_pairs)
+            points.save()
 
             response_data = {
-                'closest_points': closest_points
+                'closest_pairs': closest_pairs
             }
             return Response(response_data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @staticmethod
-    def find_closest_points(coordinates):
-        closest_points = []
+    def find_closest_pairs(coordinates):
+        closest_pairs = []
         distances = []
 
         # Calculate distances between points
@@ -44,7 +44,7 @@ class PointsAPIView(APIView):
 
         # Get the two closest points
         closest_indices = [distances[0][0], distances[0][1]]
-        closest_points = [
+        closest_pairs = [
             ','.join(str(coord) for coord in coordinates[idx]) for idx in closest_indices]
 
-        return ';'.join(closest_points)
+        return ';'.join(closest_pairs)

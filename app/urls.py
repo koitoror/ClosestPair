@@ -20,9 +20,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-from api.views import PointSetAPIView
+from api.views import PointsAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('closest_pair_api/', PointSetAPIView.as_view(), name='pointset-list'),
+    path('closest_pair_api/', PointsAPIView.as_view(), name='points-api'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

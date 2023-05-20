@@ -27,6 +27,6 @@ urlpatterns = [
     # path('closest_pair_api/', PointsAPIView.as_view(), name='points-api'),
     # path('closest_pair_api/', PointsAPIView.as_view(), ),
     # path('', include('api.urls', namespace='points-api')),
-    path('api/', include('api.urls', namespace="api")),
+    path('', include('api.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

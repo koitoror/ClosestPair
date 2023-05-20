@@ -28,6 +28,7 @@ python manage.py makemigrations
 
 python manage.py migrate --plan
 python manage.py migrate --noinput
+python manage.py migrate api
 
 echo "Running Server"
 # python manage.py createsuperuser --noinput

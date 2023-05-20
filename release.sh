@@ -33,7 +33,7 @@ echo "Running Server"
 # python manage.py createsuperuser --noinput
 # python manage.py runserver 0.0.0.0:8000
 # uwsgi --socket :8000 --workers 4 --master --enable-threads --module app.wsgi
-# gunicorn --chdir backend app.wsgi
+# gunicorn --chdir app wsgi
 # gunicorn app.wsgi:application --bind 0.0.0.0:8000
 # gunicorn --chdir app wsgi:application --bind 0.0.0.0:8000 --log-file - --log-level debug
 gunicorn --chdir app wsgi:application --log-file - --log-level debug

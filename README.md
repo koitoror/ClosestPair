@@ -95,7 +95,7 @@ HTTP/1.1 200 OK
 ```
 
 {
-    "closest_pairs": "2,2;4,5"
+    "closest_pair": "2,2;4,5"
 }
 ```
   

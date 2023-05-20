@@ -10,41 +10,42 @@ class PointsAPIView(APIView):
         serializer = PointsSerializer(data=request.data)
         if serializer.is_valid():
             points = serializer.validated_data['points'].split(';')
-            pointers = []
+            point_pairs = []
             for point in points:
-                pointers.append([float(x) for x in point.split(',')])
+                point_pairs.append([float(x) for x in point.split(',')])
 
-            closest_pairs = self.calculate_closest_pairs(pointers)
+            closest_pair = self.calculate_closest_pair(point_pairs)
 
             points = Points(
-                points=serializer.validated_data['points'], closest_pairs=closest_pairs)
+                points=serializer.validated_data['points'], closest_pair=closest_pair)  # noqa
             points.save()
 
             response_data = {
-                'closest_pairs': closest_pairs
+                'closest_pair': closest_pair
             }
             return Response(response_data, status=status.HTTP_200_OK)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # noqa
 
     @staticmethod
-    def calculate_closest_pairs(pointers):
-        closest_pairs = []
-        distances = []
+    def calculate_closest_pair(point_pairs):
+        closest_pair = []
+        manhattan_distances = []
 
-        # Calculate distances between points
-        for i in range(len(pointers)):
-            for j in range(i+1, len(pointers)):
-                distance = ((pointers[i][0] - pointers[j][0]) ** 2 +
-                            (pointers[i][1] - pointers[j][1]) ** 2) ** 0.5
-                distances.append((i, j, distance))
+        # Calculate manhattan_distances between all pairs
+        for i in range(len(point_pairs)):
+            for j in range(i+1, len(point_pairs)):
+                distance = ((point_pairs[i][0] - point_pairs[j][0]) ** 2 +
+                            (point_pairs[i][1] - point_pairs[j][1]) ** 2) ** 0.5
+                manhattan_distances.append((i, j, distance))
 
-        # Sort distances in ascending order
-        distances.sort(key=lambda x: x[2])
+        # Sort manhattan_distances in ascending order
+        manhattan_distances.sort(key=lambda x: x[2])
 
-        # Get the two closest points
-        closest_indices = [distances[0][0], distances[0][1]]
-        closest_pairs = [
-            ','.join(str(pointer) for pointer in pointers[idx]) for idx in closest_indices]
+        # Get the closest pair
+        closest_indices = [manhattan_distances[0]
+                           [0], manhattan_distances[0][1]]
+        closest_pair = [
+            ','.join(str(point_pair) for point_pair in point_pairs[idx]) for idx in closest_indices]
 
-        return ';'.join(closest_pairs)
+        return ';'.join(closest_pair)

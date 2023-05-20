@@ -7,7 +7,7 @@ from .models import Points
 class PointsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.url = reverse('api:points-api')
+        self.url = reverse('points-api')
 
     def test_add_points(self):
         data = {'points': '2,2;-1,30;20,11;4,5'}
@@ -26,12 +26,12 @@ class PointsAPITests(TestCase):
 
     def test_get_points(self):
         points = Points.objects.create(points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
-        response = self.client.get(reverse('api:points-api', args=[points.id]))
+        response = self.client.get(reverse('points-api', args=[points.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['points'], '2,2;-1,30;20,11;4,5')
         self.assertEqual(response.data['closest_pair'], '2,2;4,5')
 
     def test_get_points_not_found(self):
-        response = self.client.get(reverse('api:points-api', args=[999]))
+        response = self.client.get(reverse('points-api', args=[999]))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 

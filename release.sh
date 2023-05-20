@@ -25,11 +25,11 @@ echo "Running Release Tasks"
 
 echo "Running Database migrations and migrating the new changes"
 python manage.py makemigrations 
-python manage.py makemigrations api
+# python manage.py makemigrations api
 
-# python manage.py migrate --plan
-# python manage.py migrate --noinput
-python manage.py migrate api
+python manage.py migrate --plan
+python manage.py migrate --noinput
+# python manage.py migrate api
 
 echo "Running Server"
 # python manage.py createsuperuser --noinput

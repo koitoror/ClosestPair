@@ -47,6 +47,6 @@ class PointsAPIView(APIView):
         closest_indices = [manhattan_distances[0]
                            [0], manhattan_distances[0][1]]
         closest_pair = [
-            ','.join(str(point_pair) for point_pair in point_pairs[idx]) for idx in closest_indices] #noqa
+            ','.join(str(point_pair) for point_pair in point_pairs[idx]) for idx in closest_indices]  # noqa
 
         return ';'.join(closest_pair)

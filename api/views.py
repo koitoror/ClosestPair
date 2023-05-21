@@ -12,7 +12,7 @@ class PointsAPIView(APIView):
             points = serializer.validated_data['points'].split(';')
             point_pairs = []
             for point in points:
-                point_pairs.append([float(x) for x in point.split(',')])
+                point_pairs.append([int(x) for x in point.split(',')])
 
             closest_pair = self.calculate_closest_pair(point_pairs)
 
@@ -23,7 +23,7 @@ class PointsAPIView(APIView):
             response_data = {
                 'closest_pair': closest_pair
             }
-            return Response(response_data, status=status.HTTP_200_OK)
+            return Response(response_data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # noqa
 

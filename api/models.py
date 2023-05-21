@@ -8,4 +8,3 @@ class Points(models.Model):
 
     def __str__(self):
         return self.closest_pair
-    

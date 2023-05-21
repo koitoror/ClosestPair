@@ -35,8 +35,9 @@ class PointsAPIView(APIView):
         # Calculate manhattan_distances between all pairs
         for i in range(len(point_pairs)):
             for j in range(i+1, len(point_pairs)):
-                distance = ((point_pairs[i][0] - point_pairs[j][0]) ** 2 +
-                            (point_pairs[i][1] - point_pairs[j][1]) ** 2) ** 0.5
+                distance = (
+                    (point_pairs[i][0] - point_pairs[j][0]) ** 2 +
+                    (point_pairs[i][1] - point_pairs[j][1]) ** 2) ** 0.5
                 manhattan_distances.append((i, j, distance))
 
         # Sort manhattan_distances in ascending order
@@ -46,6 +47,6 @@ class PointsAPIView(APIView):
         closest_indices = [manhattan_distances[0]
                            [0], manhattan_distances[0][1]]
         closest_pair = [
-            ','.join(str(point_pair) for point_pair in point_pairs[idx]) for idx in closest_indices]
+            ','.join(str(point_pair) for point_pair in point_pairs[idx]) for idx in closest_indices] #noqa
 
         return ';'.join(closest_pair)

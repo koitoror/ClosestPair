@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from .models import Points
 from .views import PointsAPIView
 
+
 class PointsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -31,5 +32,6 @@ class PointsAPITests(TestCase):
         self.assertEqual(resolve(self.url).func.view_class, PointsAPIView)
 
     def test_get_points_model(self):
-        points = Points.objects.create(points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
+        points = Points.objects.create(
+            points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
         self.assertEqual(str(points), "2,2;4,5")

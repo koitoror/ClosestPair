@@ -59,6 +59,7 @@ jobs:
         # DB_PORT: 3306
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
         DB_NAME: test
+        DJANGO_SETTINGS_MODULE: app.settings
     - name: Run Linter
       run: |
         flake8 .

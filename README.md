@@ -1,5 +1,5 @@
 ![GA workflow](https://github.com/koitoror/ClosestPair/actions/workflows/django-test-action.yml/badge.svg)
-
+[![Coverage Status](https://coveralls.io/repos/github/koitoror/ClosestPair/badge.svg?branch=dev)](https://coveralls.io/github/koitoror/ClosestPair?branch=dev)
 
 ## Closest Points
 Django application with an API that receives a set of points on a grid as semicolon separated values. And then it finds the points that are closest to each other. Store the received set of points and the closest points on a DB.

@@ -7,6 +7,7 @@ from .models import Points
 from .views import PointsAPIView
 from .serializers import PointsSerializer
 
+
 class PointsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -46,9 +47,10 @@ class PointsAPITests(TestCase):
         self.assertEqual(resolve(self.url).func.view_class, PointsAPIView)
 
     def test_get_points_model(self):
-        points = Points.objects.create(points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
+        points = Points.objects.create(
+            points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
         self.assertEqual(str(points), "2,2;4,5")
-    
+
     def test_points_serializer_validates_invalid_points_format(self):
         """
         Test if the serializer validated points
@@ -59,8 +61,8 @@ class PointsAPITests(TestCase):
             serializer.is_valid,
             raise_exception=True)
         self.assertIn('Invalid point_pair format!',
-                     serializer.errors['points'][0])
-        
+                      serializer.errors['points'][0])
+
     def test_points_serializer_validates_invalid_points_single_pair(self):
         serializer = PointsSerializer(data=self.invalid_points_single_pair)
         self.assertRaises(
@@ -68,9 +70,8 @@ class PointsAPITests(TestCase):
             serializer.is_valid,
             raise_exception=True)
         self.assertIn('At least a pair of point_pairs is required.',
-                     serializer.errors['points'][0])
+                      serializer.errors['points'][0])
 
-        
     def test_points_serializer_validates_invalid_points_blank(self):
         serializer = PointsSerializer(data=self.invalid_points_blank)
         self.assertFalse(serializer.is_valid())
@@ -78,12 +79,10 @@ class PointsAPITests(TestCase):
             serializers.ValidationError,
             serializer.is_valid,
             raise_exception=True)
-        self.assertIn(serializer.errors['points'][0], 'This field may not be blank.')
-
+        self.assertIn(serializer.errors['points']
+                      [0], 'This field may not be blank.')
 
     def test_points_serializer_validates_valid_points(self):
         serializer = PointsSerializer(data=self.valid_points)
         serializer.is_valid()
         self.assertEqual(self.valid_points, serializer.data)
-
-

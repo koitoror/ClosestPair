@@ -15,6 +15,9 @@ class PointsAPITests(TestCase):
         self.valid_points = {
             "points": "2,2;-1,30;20,11;4,5"
         }
+        self.invalid_points_values = {
+            "points": "2,2;a,b;-1,30",
+        }
         self.invalid_points_format = {
             "points": "2,2;30",
         }
@@ -50,6 +53,18 @@ class PointsAPITests(TestCase):
         points = Points.objects.create(
             points='2,2;-1,30;20,11;4,5', closest_pair='2,2;4,5')
         self.assertEqual(str(points), "2,2;4,5")
+
+    def test_points_serializer_validates_invalid_points_values(self):
+        """
+        Test if the serializer validated points values
+        """
+        serializer = PointsSerializer(data=self.invalid_points_values)
+        self.assertRaises(
+            serializers.ValidationError,
+            serializer.is_valid,
+            raise_exception=True)
+        self.assertIn('Invalid point_pair values!',
+                      serializer.errors['points'][0])
 
     def test_points_serializer_validates_invalid_points_format(self):
         """
